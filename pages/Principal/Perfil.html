@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="../../Styles/principalCss/sytlePerfil.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+
+    <header class="header">
+
+        <nav class="navbar">
+
+            <a href="Home.html">Inicio</a>
+            <a href="Cursos.html">Cursos</a>
+            <a href="Sobre.html">Sobre</a>
+
+        </nav>
+
+    </header>
+
+        
+    <div class="container">
+
+        <aside class="sidebar">
+
+            <div class="logo-img">
+
+                <img class="logo" src="../../Img/Logotipo-TCC__1_-removebg-preview.png" alt="Logo">
+
+            </div>
+
+            <nav class="menu"> 
+
+                <button onclick="window.location.href='Perfil.html'">
+                    <span>
+                        <img class="perfil" src="../..//Img/tl.webp" alt="perfil">
+                        <span>Perfil</span>
+                    </span>
+                </button>
+
+                <button onclick="window.location.href='Praticar.html'">
+                    <span>
+                        <img class="praticar" src="../..//Img/tl (1).webp" alt="praticar">
+                        <span>Praticar</span>
+                    </span>
+                </button>
+
+                <button onclick="window.location.href='Ranking-campus.html'">
+                    <span>
+                        <img class="ranking" src="../..//Img/thumbnail_large.png" alt="">
+                        <span>Ranking</span>
+                    </span>
+                </button>
+
+                <button onclick="window.location.href='Mais.html'">
+                    <span>
+                        <img class="mais" src="../..//Img/tl (3).webp" alt="Mais">
+                        <span>Mais</span>
+                    </span>
+                </button>
+                
+            </nav>
+
+        </aside>
+
+    </div>
+
+    <main class="Perfil-conteudo">
+
+            <div class="avatar-container">
+                <img class="avatar" src="../..//Img/thumbnail_large.webp" alt="Avatar">
+                <div class="avatar-editor"><button class="editor"><img src="../..//Img/tl (2).webp" alt="editor"></button></div>
+            </div>
+
+
+
+            <div class="infos-usuario"> <h1 id="nome-usuario">Nome do usuario</h1>
+                <h3 id="nickname-usuario">Nickname</h3>
+                <h2 id="primeiro-login">Primeiro login:--</h2>
+                <hr class="linha-divisoria">
+            </div>
+
+            <h2 class="titulo-estatisticas">Estatísticas</h2>
+
+            <div class="estatisticas">
+                <div class="estatistica-bloco">
+                    <h3>Dias Seguidos</h3>
+                    <p id="dias-seguidos">0</p>
+                </div>
+                <div class="estatistica-bloco">
+                  <h3>Total de XP</h3>
+                  <p id="xp-total">0 XP</p>
+                </div>
+                <div class="estatistica-bloco">
+                  <h3>Nivel da conta:</h3>
+                  <p id="nivel-usuario">Nível 1</p>
+                </div>
+                <div class="estatistica-bloco">
+                  <h3>Ranking - Curso</h3>
+                  <p>3º Lugar</p>
+                </div>
+              </div>
+    </main>
+
+<script src="../../Scripts/db.js"></script>
+<script src="../../Scripts/auth.js"></script>
+    <script src="../../Scripts/usuario.js"></script>
+    <script src="../../Scripts/perfil.js"></script>
+    <script src="../../Scripts/xpManager.js"></script>
+<script>
+  const status = getStatusUsuario();
+  document.getElementById("xp-total").textContent = status.xp + " XP";
+  document.getElementById("nivel-usuario").textContent = "Nível " + status.nivel;
+</script>
+
+<script src="../../Scripts/streak.js"></script>
+<script>
+    atualizarStreak();
+    const streak = obterStreakAtual();
+    document.getElementById("dias-seguidos").textContent = streak;
+</script>
+
+
+
+
+</body>
+
+</html>

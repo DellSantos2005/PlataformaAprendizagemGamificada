@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="../../Styles/principalCss/sytleHome.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+
+    <header class="header">
+
+        <nav class="navbar">
+
+            <a href="Home.html">Inicio</a>
+            <a href="Cursos.html">Cursos</a>
+            <a href="Sobre.html">Sobre</a>
+
+        </nav>
+
+    </header>
+
+        
+    <div class="container">
+
+        <aside class="sidebar">
+
+            <div class="logo-img">
+
+                <img class="logo" src="../../Img/Logotipo-TCC__1_-removebg-preview.png" alt="Logo">
+
+            </div>
+
+            <nav class="menu"> 
+
+                <button onclick="window.location.href='Perfil.html'">
+                    <span>
+                        <img class="perfil" src="../..//Img/tl.webp" alt="perfil">
+                        <span>Perfil</span>
+                    </span>
+                </button>
+
+                <button onclick="window.location.href='Praticar.html'">
+                    <span>
+                        <img class="praticar" src="../..//Img/tl (1).webp" alt="praticar">
+                        <span>Praticar</span>
+                    </span>
+                </button>
+
+                <button onclick="window.location.href='Ranking-campus.html'">
+                    <span>
+                        <img class="ranking" src="../..//Img/thumbnail_large.png" alt="">
+                        <span>Ranking</span>
+                    </span>
+                </button>
+
+                <button onclick="window.location.href='Mais.html'">
+                    <span>
+                        <img class="mais" src="../..//Img/tl (3).webp" alt="Mais">
+                        <span>Mais</span>
+                    </span>
+                </button>
+                
+            </nav>
+
+        </aside>
+
+    </div>
+    <main class="Bem-Vindo">
+
+        <h1>Seja Bem-Vindo🎉</h1>
+        <p class="curso">Curso: <span id="nome-curso">--</span></p>
+        <p> Aqui, você encontrará um ambiente dedicado ao seu aprendizado e crescimento...</p>
+      
+        <div class="anos-container">
+          <button id="btn-1ano" class="desbloqueado">
+            1º ANO
+          </button>
+
+          
+      
+          <button id="btn-2ano" class="bloqueado" style="display: none;" disabled>2º ANO</button>
+      
+          <button class="bloqueado" disabled>3º ANO <img src="https://img.icons8.com/ios-filled/50/lock-2.png" alt="Bloqueado"></button>
+          <button class="bloqueado" disabled>4º ANO <img src="https://img.icons8.com/ios-filled/50/lock-2.png" alt="Bloqueado"></button>
+        </div>
+      
+      </main>
+
+          <script src="../../Scripts/db.js"></script>
+      <script src="../../Scripts/auth.js"></script>
+      <script src="../../Scripts/usuario.js"></script>
+      <script src="../../Scripts/progresso.js"></script>
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const usuario = JSON.parse(localStorage.getItem("usuario"));
+          if (!usuario || !usuario.curso) return;
+      
+          const cursoOriginal = usuario.curso;
+          const curso = cursoOriginal.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          document.getElementById("nome-curso").textContent = cursoOriginal;
+      
+          const assuntosTI = [
+            "sistemas-operacionais",
+            "pacote-office",
+            "internet-seguranca",
+            "estruturas-condicionais",
+            "lacos-repeticao",
+            "funcoes"
+          ];
+      
+          const assuntosEletro = [
+            "Carga-Corrente",
+            "tensao-potencial",
+            "resistencia-ohm",
+            "circuitos-basicos",
+            "Normas-Convencoes",
+            "simbologia-eletrica",
+            "plantas-diagramas",
+            "projeto-instalacao"
+          ];
+      
+          let assuntosCurso = [];
+          let caminho1ano = "";
+          let caminho2ano = "";
+      
+          if (curso.includes("informatica") || curso.includes("ti")) {
+            assuntosCurso = assuntosTI;
+            caminho1ano = "../conteudo/TI/1 ano/1ºano.html";
+            caminho2ano = "../conteudo/TI/2 ano/2ºano.html";
+          } else if (curso.includes("eletro")) {
+            assuntosCurso = assuntosEletro;
+            caminho1ano = "../conteudo/Eletro/1 ano/1ºano.html";
+            caminho2ano = "../conteudo/Eletro/2 ano/2ºano.html";
+          }
+      
+          const botao1ano = document.getElementById("btn-1ano");
+          const botao2ano = document.getElementById("btn-2ano");
+      
+          // Botão do 1º ano redireciona para a página correta
+          if (botao1ano) {
+            botao1ano.onclick = () => {
+              window.location.href = caminho1ano;
+            };
+          }
+      
+          // Verifica se todos os assuntos do 1º ano foram concluídos
+          const concluido = assuntosCurso.every(id => localStorage.getItem(id) === "desbloqueado");
+      
+          // Configura botão do 2º ano
+          if (botao2ano) {
+            botao2ano.style.display = "block";
+      
+            if (concluido) {
+              botao2ano.disabled = false;
+              botao2ano.classList.remove("bloqueado");
+              botao2ano.innerHTML = "2º ANO";
+              botao2ano.onclick = () => {
+                window.location.href = caminho2ano;
+              };
+            }
+          }
+        });
+      </script>
+
+</body>
+
+</html>
